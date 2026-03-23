@@ -57,7 +57,7 @@ def get_employees():
 # READ (SINGLE)
 @app.route('/employees/<int:id>', methods=['GET'])
 def get_employee(id):
-    emp = Employee.query.get(id)
+    emp = db.session.get(Employee, id)
 
     if not emp:
         return jsonify({"message": "Employee not found"}), 404
@@ -72,7 +72,7 @@ def get_employee(id):
 # UPDATE (PUT)
 @app.route('/employees/<int:id>', methods=['PUT'])
 def update_employee(id):
-    emp = Employee.query.get(id)
+    emp = db.session.get(Employee, id)
 
     if not emp:
         return jsonify({"message": "Employee not found"}), 404
@@ -98,7 +98,7 @@ def update_employee(id):
 # DELETE
 @app.route('/employees/<int:id>', methods=['DELETE'])
 def delete_employee(id):
-    emp = Employee.query.get(id)
+    emp = db.session.get(Employee, id)
 
     if not emp:
         return jsonify({"message": "Employee not found"}), 404
