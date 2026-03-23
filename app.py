@@ -17,13 +17,19 @@ class Employee(db.Model):
 with app.app_context():
     db.create_all()
 
-# CREATE
+# CREATE (POST)
 @app.route('/employees', methods=['POST'])
 def add_employee():
     data = request.json
 
     if not data or 'name' not in data or 'salary' not in data:
         return jsonify({"message": "Invalid data"}), 400
+
+    if data['name'].strip() == "":
+        return jsonify({"message": "Name cannot be empty"}), 400
+
+    if data['salary'] < 0:
+        return jsonify({"message": "Salary cannot be negative"}), 400
 
     new_emp = Employee(name=data['name'], salary=data['salary'])
     db.session.add(new_emp)
@@ -32,7 +38,7 @@ def add_employee():
     return jsonify({"message": "Employee added"}), 201
 
 
-# READ (all)
+# READ (ALL)
 @app.route('/employees', methods=['GET'])
 def get_employees():
     employees = Employee.query.all()
@@ -48,7 +54,7 @@ def get_employees():
     return jsonify(result)
 
 
-# READ (single)
+# READ (SINGLE)
 @app.route('/employees/<int:id>', methods=['GET'])
 def get_employee(id):
     emp = Employee.query.get(id)
@@ -63,7 +69,7 @@ def get_employee(id):
     })
 
 
-# UPDATE
+# UPDATE (PUT)
 @app.route('/employees/<int:id>', methods=['PUT'])
 def update_employee(id):
     emp = Employee.query.get(id)
@@ -75,6 +81,12 @@ def update_employee(id):
 
     if not data or 'name' not in data or 'salary' not in data:
         return jsonify({"message": "Invalid data"}), 400
+
+    if data['name'].strip() == "":
+        return jsonify({"message": "Name cannot be empty"}), 400
+
+    if data['salary'] < 0:
+        return jsonify({"message": "Salary cannot be negative"}), 400
 
     emp.name = data['name']
     emp.salary = data['salary']
