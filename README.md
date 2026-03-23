@@ -1,22 +1,50 @@
 # Employee CRUD API (Flask)
 
-This is a simple REST API built using Flask that performs CRUD operations on employee data.
+A RESTful API built using Flask to manage employee data with full CRUD operations and basic input validation.
 
-## Features
-- Create Employee (POST)
-- Read Employees (GET)
-- Update Employee (PUT)
-- Delete Employee (coming soon)
+---
 
-## Tech Stack
-- Python
-- Flask
-- SQLite
+## 🚀 Features
 
-## How to Run
-1. Clone the repository
-2. Install dependencies
-3. Run the Flask app
+* Create Employee (POST)
+* Get All Employees (GET)
+* Get Single Employee by ID (GET)
+* Update Employee (PUT)
+* Delete Employee (DELETE)
+* Input Validation
 
-## Author
+---
+
+## 🛠 Tech Stack
+
+* Python
+* Flask
+* SQLAlchemy
+* SQLite
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint        | Description         |
+| ------ | --------------- | ------------------- |
+| POST   | /employees      | Create employee     |
+| GET    | /employees      | Get all employees   |
+| GET    | /employees/<id> | Get single employee |
+| PUT    | /employees/<id> | Update employee     |
+| DELETE | /employees/<id> | Delete employee     |
+
+---
+
+## ▶️ How to Run
+
+```bash
+pip install flask flask_sqlalchemy
+python app.py
+```
+
+---
+
+## 👨‍💻 Author
+
 Sai Durgesh
